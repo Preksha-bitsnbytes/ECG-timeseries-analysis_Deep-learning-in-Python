@@ -1,0 +1,55 @@
+% Load the .mat file
+matFileName = 'data.mat'; % Replace with your .mat file name
+data = load(matFileName);
+
+% Extract all variables
+fieldNames = fieldnames(data);
+
+
+
+%To extract ecgSignal variable values into a csv file from 1 mat file.
+------
+    ecgSignal = data.ecgSignal;
+    ecgCsvName = [matfiles(i).]
+    csvwrite('ecgSignal.csv',ecgSignal)
+-------
+
+%To extract ecgSignal variable values into a csv file from 1 mat file.
+-----
+nestedTable = signalRegionLabels;
+flattenedTable = splitvars(nestedTable);
+writeTable(flattenedTable, 'output.csv', 'Delimiter', ',','QuoteStrings', true);
+-----
+
+
+## To extract csv files from multiple mat files
+
+% Specify the folder containing the .mat files
+folder = '/MATLAB Drive';
+
+% Get a list of all .mat files in the folder
+matFiles = dir(fullfile(folder, '*.mat'));
+
+% Loop through each .mat file
+for i = 1:length(matFiles)
+    % Load the .mat file
+    fileName = fullfile(folder, matFiles(i).name);
+    data = load(fileName);
+    
+    % Extract ecgSignal
+    ecgSignal = data.ecgSignal;
+    
+    % Save ecgSignal as CSV
+    ecgCsvName = [matFiles(i).name(1:end-4) '_ecgSignal.csv'];
+    writematrix(ecgSignal, fullfile(folder, ecgCsvName));
+    
+    % Extract and flatten signalRegionLabels
+    if isfield(data, 'signalRegionLabels')
+        nestedTable = data.signalRegionLabels;
+        flattenedTable = splitvars(nestedTable);
+        
+        % Save flattened table as CSV
+        tableCsvName = [matFiles(i).name(1:end-4) '_signalRegionLabels.csv'];
+        writetable(flattenedTable, fullfile(folder, tableCsvName));
+    end
+end
