@@ -128,7 +128,7 @@ The model is compiled with the following settings:
 
 # Model outcomes:
 
-LSTM model without z-score normalisation gives a prediction accuracy of 80% which is improved to 88% after signal normalisation. 
+LSTM model without z-score normalisation (LSTM1) gives a prediction accuracy of 80% which is improved to 88% after signal normalisation (LSTM2). 
 
 The basic CNN model picks up multiple peak signatures beyond the expected P, QRS & T signals. Will need further refinement. Doesn't seem to be faster or more efficient than LSTM in the current form. 
 
